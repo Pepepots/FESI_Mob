@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mascota/actividades.dart';
 import 'package:mascota/mascota.dart';
 
 void main() {

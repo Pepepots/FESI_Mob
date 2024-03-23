@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mascota/actividades.dart';
 
 class Mascota extends StatelessWidget {
   const Mascota({super.key});
@@ -19,7 +20,13 @@ class Mascota extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () {}, child: const Text('Recompesas')),
                   ElevatedButton(
-                      onPressed: () {}, child: const Text('Actividades'))
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Actividades()));
+                      },
+                      child: const Text('Actividades'))
                 ],
               )
             ],
