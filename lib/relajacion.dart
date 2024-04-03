@@ -4,9 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:mascota/fondo.dart';
 
 class Relajacion extends StatefulWidget {
-  const Relajacion({super.key, required this.title});
-
-  final String title;
+  const Relajacion({super.key});
 
   @override
   State<Relajacion> createState() => _RelajacionState();
@@ -81,7 +79,7 @@ class _RelajacionState extends State<Relajacion> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: CupertinoColors.tertiarySystemBackground,
-        title: Text(widget.title, textAlign: TextAlign.center),
+        title: const Text('Relajacion', textAlign: TextAlign.center),
         centerTitle: true,
       ),
       body: Stack(
@@ -104,6 +102,13 @@ class _RelajacionState extends State<Relajacion> {
                         playAudio('cancion15.mp3');
                       },
                       icon: const Icon(Icons.play_arrow),
+                      color: Colors.white,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        audioPlayer.pause();
+                      },
+                      icon: const Icon(Icons.pause),
                       color: Colors.white,
                     ),
                     IconButton(

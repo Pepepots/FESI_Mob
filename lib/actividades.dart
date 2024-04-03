@@ -40,9 +40,7 @@ class Actividades extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Relajacion(
-                              title: 'Hola',
-                            )));
+                        builder: (context) => const Relajacion()));
               },
               child: const Text('Relajacion')),
         ],
