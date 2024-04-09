@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mascota/Providers/variableGlobal.dart';
 import 'package:mascota/actividades.dart';
+import 'package:provider/provider.dart';
 
 class Mascota extends StatelessWidget {
   const Mascota({super.key});
 
   @override
   Widget build(BuildContext context) {
+    VariableGlobal watch = context.watch<VariableGlobal>();
+    context.read<VariableGlobal>().setEstado('True');
     return Container(
         color: Colors.indigo,
         child: Center(
@@ -27,6 +31,13 @@ class Mascota extends StatelessWidget {
                                 builder: (context) => const Actividades()));
                       },
                       child: const Text('Actividades'))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(watch.estado,
+                  style: TextStyle(color: Colors.white))
                 ],
               )
             ],
