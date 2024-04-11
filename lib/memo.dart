@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mascota/actividades.dart';
 import 'package:mascota/utils/game_logic.dart';
 
 class Memorama extends StatefulWidget {
@@ -75,9 +76,12 @@ class _MemoramaState extends State<Memorama> {
               ),
               actions: <Widget>[
                 TextButton(
-                  child: Text('Cerrar'),
+                  child: const Text('Cerrar'),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Actividades()));
                   },
                 ),
               ],
