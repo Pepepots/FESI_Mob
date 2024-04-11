@@ -11,13 +11,14 @@ class Memorama extends StatefulWidget {
 class _MemoramaState extends State<Memorama> {
   Game _game = Game(4);
   int inten = 0;
-  int punto = 0;
   int _crossAxisCount = 2;
+  bool memoramaCompleto = false;
 
   void _updateSize(int cards, int space) {
     setState(() {
       _game = Game(cards);
       _crossAxisCount = space;
+      memoramaCompleto = false;
       _game.initGame();
     });
   }
@@ -58,6 +59,34 @@ class _MemoramaState extends State<Memorama> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
+    if (memoramaCompleto) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Ni estaba tan dificil'),
+              content: const SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text('Vuelve mañana por mas'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('Cerrar'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Memorama'),
@@ -82,12 +111,12 @@ class _MemoramaState extends State<Memorama> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [board("2x2", 4, 2), board("2x3", 6, 3)],
+            children: [board("2x2", 4, 2), board("3x2", 6, 3)],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [board("2x4", 8, 4), board("3x4", 12, 4)],
+            children: [board("4x3", 12, 4), board("4x4", 16, 4)],
           ),
           SizedBox(
             height: screenWidth,
@@ -110,10 +139,13 @@ class _MemoramaState extends State<Memorama> {
                         if (_game.match.length == 2) {
                           if (_game.match[0].values.first ==
                               _game.match[1].values.first) {
-                            punto += 100;
                             _game.match.clear();
+                            if (_game.gameImg!
+                                .every((img) => img != _game.hiddenCard)) {
+                              memoramaCompleto = true;
+                            }
                           } else {
-                            Future.delayed(const Duration(milliseconds: 500),
+                            Future.delayed(const Duration(milliseconds: 200),
                                 () {
                               setState(() {
                                 _game.gameImg![_game.match[0].keys.first] =
