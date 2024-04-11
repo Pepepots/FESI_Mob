@@ -10,7 +10,9 @@ class Game {
     "assets/images/rombo.png",
     "assets/images/triangulo.png",
     "assets/images/estrella.png",
-    "assets/images/pentagono.png"
+    "assets/images/pentagono.png",
+    "assets/images/elipse.png",
+    "assets/images/rectangulo.png"
   ];
 
   final List<String> cardList = [];
