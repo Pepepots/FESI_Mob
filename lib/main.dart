@@ -19,9 +19,10 @@ class MyApp extends StatelessWidget {
         ],
         builder: (context, _) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
               title: 'Mascota',
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(6, 4, 81, 248)),
                 useMaterial3: true,
               ),
               home: const Mascota());

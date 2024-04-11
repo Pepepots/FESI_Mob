@@ -9,20 +9,26 @@ class Mascota extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     VariableGlobal watch = context.watch<VariableGlobal>();
-    context.read<VariableGlobal>().setEstado('True');
+    //context.read<VariableGlobal>().setEstado('True');
     return Container(
-        color: Colors.indigo,
+        color: Color.fromARGB(255, 80, 131, 250),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.network(
                   'https://res.cloudinary.com/pepepots9414/image/upload/v1651287045/frappe-782544_ktsv6b.png'),
+              SizedBox(
+                height: 60,
+              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                      onPressed: () {}, child: const Text('Recompesas')),
+                      onPressed: () {},
+                      child: const Text('Recompesas'),
+                  ),
+                  
                   ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -30,16 +36,17 @@ class Mascota extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => const Actividades()));
                       },
-                      child: const Text('Actividades'))
+                      child: const Text('Actividades'),
+                  ),
                 ],
               ),
-              Row(
+/*               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(watch.estado,
                   style: TextStyle(color: Colors.white))
                 ],
-              )
+              ) */
             ],
           ),
         ));

@@ -77,11 +77,6 @@ class _RelajacionState extends State<Relajacion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CupertinoColors.tertiarySystemBackground,
-        title: const Text('Relajacion', textAlign: TextAlign.center),
-        centerTitle: true,
-      ),
       body: Stack(
         children: [
           const Fondo(), //FONDO DE PANTALLA
