@@ -7,6 +7,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Mascota extends StatelessWidget {
   const Mascota({super.key});
 
+  static int ultimoDia = 15;
+
+  Future<void> setInitialDate() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('fechaInicio')) {
+      prefs.setString('fechaInicio', DateTime.now().toIso8601String());
+    }
+  }
+
+  Future<int> calcularDiasDesdeInicio() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('fechaInicio')) {
+      DateTime fechaInicio = DateTime.parse(prefs.getString('fechaInicio')!);
+      DateTime fechaActual = DateTime.now();
+      return fechaActual.difference(fechaInicio).inDays;
+    }
+    return 0;
+  }
+
+  void verificarDias() async {
+    int diasDesdeInicio = await calcularDiasDesdeInicio();
+    int diasDefinidos = 30; // La cantidad de días que defines
+
+    if (diasDesdeInicio >= diasDefinidos) {
+      // Realizar alguna acción
+    }
+  }
+
   static Map<String, dynamic> actividadesJson = {
     "Dia1": {
       "Ejercicio": false,
