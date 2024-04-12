@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mascota/actividades.dart';
+import 'package:mascota/mascota.dart';
 import 'package:mascota/utils/game_logic.dart';
 
 class Memorama extends StatefulWidget {
@@ -10,16 +11,39 @@ class Memorama extends StatefulWidget {
 }
 
 class _MemoramaState extends State<Memorama> {
+  int dia = 0;
+  List<String> dias = [
+    'Dia1',
+    'Dia2',
+    'Dia3',
+    'Dia4',
+    'Dia5',
+    'Dia6',
+    'Dia7',
+    'Dia8',
+    'Dia9',
+    'Dia10',
+    'Dia11',
+    'Dia12',
+    'Dia13',
+    'Dia14',
+    'Dia15'
+  ];
   Game _game = Game(4);
   int inten = 0;
   int _crossAxisCount = 2;
   bool memoramaCompleto = false;
+
+  void completarMemorama() {
+    Mascota.actividadesJson[dias[dia]]['Memorama'] = true;
+  }
 
   void _updateSize(int cards, int space) {
     setState(() {
       _game = Game(cards);
       _crossAxisCount = space;
       memoramaCompleto = false;
+      completarMemorama();
       _game.initGame();
     });
   }
