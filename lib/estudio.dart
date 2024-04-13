@@ -23,16 +23,14 @@ class _EstudioState extends State<Estudio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Estudio'),
-      ),
+      backgroundColor: Color.fromARGB(255, 80, 131, 250),
       body: _questionIndex < _questions.length
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   _questions[_questionIndex],
-                  style: const TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 const SizedBox(height: 20),
                 Row(
@@ -63,13 +61,13 @@ class _EstudioState extends State<Estudio> {
               ? const Center(
                   child: Text(
                     'Felicidades, completaste el primer día!',
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24, color: Colors.white),
                   ),
                 )
               : const Center(
                   child: Text(
                     'Buen intento, sigue intentando!',
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24, color: Colors.white),
                   ),
                 ),
     );

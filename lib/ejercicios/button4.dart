@@ -53,47 +53,57 @@ class _Ejercicios4State extends State<Ejercicios4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        title: const Text('Deporte'),
+        backgroundColor: const Color.fromARGB(255, 80, 131, 250),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text('Deporte', style: TextStyle(color: Colors.white),),
       ),
       body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            style: TextButton.styleFrom(
-                backgroundColor: _futbol
-                    ? const Color.fromARGB(255, 13, 173, 67)
-                    : Colors.transparent),
-            onPressed: _cambioColorfutbol,
-            child: const Text('Futbol'),
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-                backgroundColor: _taekwondo
-                    ? const Color.fromARGB(255, 13, 173, 67)
-                    : Colors.transparent),
-            onPressed: _cambioColortaekwondo,
-            child: const Text('Taekwodo'),
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-                backgroundColor: _atletismo
-                    ? const Color.fromARGB(255, 13, 173, 67)
-                    : Colors.transparent),
-            onPressed: _cambioColoratletismo,
-            child: const Text('Atletismo'),
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-                backgroundColor: _validarLista
-                    ? const Color.fromARGB(255, 255, 255, 255)
-                    : Colors.transparent),
-            onPressed: _setLista,
-            child: const Text('Listo'),
-          ),
-        ],
-      )),
+        child: Container(
+          height: 640,
+          width: 290,
+          color: Color.fromARGB(50, 80, 131, 253),
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: _futbol
+                        ? Color.fromARGB(60, 29, 106, 240)
+                        : Colors.transparent),
+                onPressed: _cambioColorfutbol,
+                child: const Text('Futbol'),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: _taekwondo
+                        ? Color.fromARGB(60, 29, 106, 240)
+                        : Colors.transparent),
+                onPressed: _cambioColortaekwondo,
+                child: const Text('Taekwodo'),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: _atletismo
+                        ? Color.fromARGB(60, 29, 106, 240)
+                        : Colors.transparent),
+                onPressed: _cambioColoratletismo,
+                child: const Text('Atletismo'),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: _validarLista
+                        ? const Color.fromARGB(255, 255, 255, 255)
+                        : Colors.transparent),
+                onPressed: _setLista,
+                child: const Text('Listo'),
+              ),
+            ],
+          )),
+        ),
+      ),
     );
   }
 }

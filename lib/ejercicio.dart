@@ -10,75 +10,82 @@ class Ejercicio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ejercicio'),
+      body: Padding(
+        padding: const EdgeInsets.all(40.0),
+        child: Center(
+            child: GridView.count(
+          crossAxisCount: 2,
+          crossAxisSpacing: 15, //  espacio horizontal entre los elementos
+          mainAxisSpacing: 35, // espacio vertical entre los elementos
+          shrinkWrap: true, // True para efecto del Center
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 80, 131, 255),
+                // fixedSize: const Size(150, 150),
+              ),
+              child: const Text(
+                textAlign: TextAlign.center,
+                'ACTIVIDAD EN CASA',
+                style: TextStyle(color: Colors.white, fontSize: 15.0),
+              ),
+              onPressed: () {
+                //Ir a la segunda pantalla
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Ejercicios()));
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 80, 131, 255),
+                // fixedSize: const Size(150, 150),
+              ),
+              child: const Text(
+                textAlign: TextAlign.center,
+                'GIMNASIO DE PESAS',
+                style: TextStyle(color: Colors.white, fontSize: 15.0),
+              ),
+              onPressed: () {
+                //Ir a la segunda pantalla
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Ejercicios2()));
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 80, 131, 255),
+                // fixedSize: const Size(150, 150),
+              ),
+              child: const Text(
+                textAlign: TextAlign.center,
+                'CAMINAR CORRER TROTAR',
+                style: TextStyle(color: Colors.white, fontSize: 15.0),
+              ),
+              onPressed: () {
+                //Ir a la segunda pantalla
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Ejercicios3()));
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 80, 131, 255),
+                // fixedSize: const Size(150, 150),
+              ),
+              child: const Text(
+                textAlign: TextAlign.center,
+                'DEPORTE',
+                style: TextStyle(color: Colors.white, fontSize: 15.0),
+              ),
+              onPressed: () {
+                //Ir a la segunda pantalla
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Ejercicios4()));
+              },
+            ),
+          ],
+        )),
       ),
-      body: Center(
-          child: GridView.count(
-        crossAxisCount: 2,
-        children: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lime[900],
-              // fixedSize: const Size(150, 150),
-            ),
-            child: const Text(
-              'Actividad en casa',
-              style: TextStyle(color: Colors.white, fontSize: 15.0),
-            ),
-            onPressed: () {
-              //Ir a la segunda pantalla
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Ejercicios()));
-            },
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lime[900],
-              // fixedSize: const Size(150, 150),
-            ),
-            child: const Text(
-              'Gimnasio de pesas',
-              style: TextStyle(color: Colors.white, fontSize: 15.0),
-            ),
-            onPressed: () {
-              //Ir a la segunda pantalla
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Ejercicios2()));
-            },
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lime[900],
-              // fixedSize: const Size(150, 150),
-            ),
-            child: const Text(
-              'Caminar, correr, trotar',
-              style: TextStyle(color: Colors.white, fontSize: 15.0),
-            ),
-            onPressed: () {
-              //Ir a la segunda pantalla
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Ejercicios3()));
-            },
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lime[900],
-              // fixedSize: const Size(150, 150),
-            ),
-            child: const Text(
-              'Deporte',
-              style: TextStyle(color: Colors.white, fontSize: 15.0),
-            ),
-            onPressed: () {
-              //Ir a la segunda pantalla
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Ejercicios4()));
-            },
-          ),
-        ],
-      )),
     );
   }
 }
