@@ -21,7 +21,7 @@ class Game {
   final List<String> cardList = [];
   Set<String> usedCards = {};
   List<Map<int, String>> match = [];
-  int cartas = 0;
+  int cartas = 4;
   Game(this.dias) {
     if (dias <= 3) {
       cartas = 4;
@@ -37,7 +37,7 @@ class Game {
   }
 
   void initGame() {
-    Random random = new Random();
+    Random random = Random();
     while (cardList.length < cartas) {
       String randomCard = allCard[random.nextInt(allCard.length)];
       if (!usedCards.contains(randomCard)) {

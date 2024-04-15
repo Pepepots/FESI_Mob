@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mascota/actividades.dart';
-import 'package:mascota/mascota.dart';
 import 'package:mascota/utils/game_logic.dart';
 
 class Memorama extends StatefulWidget {
@@ -11,56 +10,17 @@ class Memorama extends StatefulWidget {
 }
 
 class _MemoramaState extends State<Memorama> {
-  List<String> dias = [
-    'Dia1',
-    'Dia2',
-    'Dia3',
-    'Dia4',
-    'Dia5',
-    'Dia6',
-    'Dia7',
-    'Dia8',
-    'Dia9',
-    'Dia10',
-    'Dia11',
-    'Dia12',
-    'Dia13',
-    'Dia14',
-    'Dia15'
-  ];
-  int dia = 0;
-  late Game _game;
-  @override
-  void initState() {
-    super.initState();
-    _game = Game(dia);
-  }
-
+  Game _game = Game(4);
   int inten = 0;
-  int _CrossAxisCount(int dia) {
-    if (dia <= 3) {
-      return 2;
-    } else if (dia <= 6) {
-      return 3;
-    } else if (dia <= 12) {
-      return 4;
-    } else {
-      return 5;
-    }
-  }
-
+  int punto = 0;
+  int _crossAxisCount = 2;
   bool memoramaCompleto = false;
-
-  void completarMemorama() {
-    Mascota.actividadesJson[dias[dia]]['Memorama'] = true;
-  }
 
   void _updateSize(int cards, int space) {
     setState(() {
-      _game = Game(dia);
+      _game = Game(cards);
       _crossAxisCount = space;
-      memoramaCompleto = false;
-      completarMemorama();
+      memoramaCompleto = true;
       _game.initGame();
     });
   }
@@ -89,6 +49,12 @@ class _MemoramaState extends State<Memorama> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _game.initGame();
   }
 
   @override
@@ -199,7 +165,7 @@ class _MemoramaState extends State<Memorama> {
                         height: 10.0,
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 7, 71, 180),
+                          color: const Color.fromARGB(255, 7, 71, 180),
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
                             image: AssetImage(_game.gameImg![index]),
