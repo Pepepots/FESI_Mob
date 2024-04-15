@@ -1,23 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:mascota/actividades.dart';
+import 'package:mascota/mascota.dart';
 import 'package:mascota/utils/game_logic.dart';
 
 class Memorama extends StatefulWidget {
-  const Memorama({super.key});
+  const Memorama({Key? key}) : super(key: key);
 
   @override
   State<Memorama> createState() => _MemoramaState();
 }
 
 class _MemoramaState extends State<Memorama> {
-  Game _game = Game(4);
+  List<String> dias = [
+    'Dia1',
+    'Dia2',
+    'Dia3',
+    'Dia4',
+    'Dia5',
+    'Dia6',
+    'Dia7',
+    'Dia8',
+    'Dia9',
+    'Dia10',
+    'Dia11',
+    'Dia12',
+    'Dia13',
+    'Dia14',
+    'Dia15'
+  ];
+  int dia = 0;
+  late Game _game;
+  @override
+  void initState() {
+    super.initState();
+    _game = Game(dia);
+  }
+
   int inten = 0;
-  int punto = 0;
   int _crossAxisCount = 2;
+  bool memoramaCompleto = false;
+
+  void completarMemorama() {
+    Mascota.actividadesJson[dias[dia]]['Memorama'] = true;
+  }
 
   void _updateSize(int cards, int space) {
     setState(() {
-      _game = Game(cards);
+      _game = Game(dia);
       _crossAxisCount = space;
+      memoramaCompleto = false;
+      completarMemorama();
       _game.initGame();
     });
   }
@@ -49,20 +81,42 @@ class _MemoramaState extends State<Memorama> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _game.initGame();
-  }
-
-  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
+    if (memoramaCompleto) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Ni estaba tan dificil'),
+              content: const SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text('Vuelve mañana por mas'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Cerrar'),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Actividades()));
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      });
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Memorama'),
-      ),
-      backgroundColor: const Color.fromRGBO(32, 44, 86, 1),
+      backgroundColor: const Color.fromARGB(255, 80, 131, 250),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,17 +131,17 @@ class _MemoramaState extends State<Memorama> {
             ),
           ),
           const SizedBox(
-            height: 24.0,
+            height: 18.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [board("2x2", 4, 2), board("2x3", 6, 3)],
+            children: [board("2x2", 4, 2), board("3x2", 6, 3)],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [board("2x4", 8, 4), board("3x4", 12, 4)],
+            children: [board("4x3", 12, 4), board("4x4", 16, 4)],
           ),
           SizedBox(
             height: screenWidth,
@@ -110,10 +164,13 @@ class _MemoramaState extends State<Memorama> {
                         if (_game.match.length == 2) {
                           if (_game.match[0].values.first ==
                               _game.match[1].values.first) {
-                            punto += 100;
                             _game.match.clear();
+                            if (_game.gameImg!
+                                .every((img) => img != _game.hiddenCard)) {
+                              memoramaCompleto = true;
+                            }
                           } else {
-                            Future.delayed(const Duration(milliseconds: 500),
+                            Future.delayed(const Duration(milliseconds: 200),
                                 () {
                               setState(() {
                                 _game.gameImg![_game.match[0].keys.first] =
@@ -131,11 +188,11 @@ class _MemoramaState extends State<Memorama> {
                         height: 10.0,
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
-                          color: const Color.fromRGBO(172, 150, 90, 1),
+                          color: Color.fromARGB(255, 7, 71, 180),
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
                             image: AssetImage(_game.gameImg![index]),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain, 
                           ),
                         ),
                       ));
