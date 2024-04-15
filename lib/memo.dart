@@ -4,14 +4,13 @@ import 'package:mascota/mascota.dart';
 import 'package:mascota/utils/game_logic.dart';
 
 class Memorama extends StatefulWidget {
-  const Memorama({super.key});
+  const Memorama({Key? key}) : super(key: key);
 
   @override
   State<Memorama> createState() => _MemoramaState();
 }
 
 class _MemoramaState extends State<Memorama> {
-  int dia = 0;
   List<String> dias = [
     'Dia1',
     'Dia2',
@@ -29,7 +28,14 @@ class _MemoramaState extends State<Memorama> {
     'Dia14',
     'Dia15'
   ];
-  Game _game = Game(4);
+  int dia = 0;
+  late Game _game;
+  @override
+  void initState() {
+    super.initState();
+    _game = Game(dia);
+  }
+
   int inten = 0;
   int _crossAxisCount = 2;
   bool memoramaCompleto = false;
@@ -40,7 +46,7 @@ class _MemoramaState extends State<Memorama> {
 
   void _updateSize(int cards, int space) {
     setState(() {
-      _game = Game(cards);
+      _game = Game(dia);
       _crossAxisCount = space;
       memoramaCompleto = false;
       completarMemorama();
@@ -72,12 +78,6 @@ class _MemoramaState extends State<Memorama> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _game.initGame();
   }
 
   @override

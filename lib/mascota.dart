@@ -7,8 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Mascota extends StatelessWidget {
   const Mascota({super.key});
 
-  static int ultimoDia = 15;
-
   Future<void> setInitialDate() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('fechaInicio')) {
@@ -16,7 +14,7 @@ class Mascota extends StatelessWidget {
     }
   }
 
-  Future<int> calcularDiasDesdeInicio() async {
+  Future<int> calcularDias() async {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey('fechaInicio')) {
       DateTime fechaInicio = DateTime.parse(prefs.getString('fechaInicio')!);
@@ -24,15 +22,6 @@ class Mascota extends StatelessWidget {
       return fechaActual.difference(fechaInicio).inDays;
     }
     return 0;
-  }
-
-  void verificarDias() async {
-    int diasDesdeInicio = await calcularDiasDesdeInicio();
-    int diasDefinidos = 30; // La cantidad de días que defines
-
-    if (diasDesdeInicio >= diasDefinidos) {
-      // Realizar alguna acción
-    }
   }
 
   static Map<String, dynamic> actividadesJson = {
@@ -141,6 +130,8 @@ class Mascota extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setInitialDate();
+    guardarJson(actividadesJson);
     return Container(
         color: Colors.indigo,
         child: Center(
@@ -155,11 +146,13 @@ class Mascota extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () {}, child: const Text('Recompesas')),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        int dias = await calcularDias();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Actividades()));
+                              builder: (context) => Actividades(),
+                            ));
                       },
                       child: const Text('Actividades'))
                 ],

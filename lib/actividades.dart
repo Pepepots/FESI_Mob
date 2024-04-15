@@ -5,7 +5,7 @@ import 'package:mascota/memo.dart';
 import 'package:mascota/relajacion.dart';
 
 class Actividades extends StatelessWidget {
-  const Actividades({super.key});
+  const Actividades({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
