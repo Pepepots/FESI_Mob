@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:mascota/DialogWidget.dart';
 import 'package:mascota/fondo.dart';
 
 class Relajacion extends StatefulWidget {
@@ -12,6 +15,7 @@ class Relajacion extends StatefulWidget {
 
 class _RelajacionState extends State<Relajacion> {
   AudioPlayer audioPlayer = AudioPlayer();
+  bool completado = false;
   String status = 'No iniciado';
   int _progress = 0;
   late int totalDurationInSeconds;
@@ -37,7 +41,8 @@ class _RelajacionState extends State<Relajacion> {
           if (state == PlayerState.playing) {
             status = 'REPRODUCIENDO';
           } else if (state == PlayerState.stopped) {
-            status = 'EN MODO PAUSA';
+            status = 'DETENIDO';
+            completado = true;
           } else if (state == PlayerState.completed) {
             status = 'REPRODUCCIÓN COMPLETA';
           }
@@ -76,7 +81,7 @@ class _RelajacionState extends State<Relajacion> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return completado ? const DialogWidget() : Scaffold(
       body: Stack(
         children: [
           const Fondo(), //FONDO DE PANTALLA
@@ -178,3 +183,5 @@ class _RelajacionState extends State<Relajacion> {
     );
   }
 }
+
+
