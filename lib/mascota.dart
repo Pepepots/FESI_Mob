@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:mascota/Providers/variableGlobal.dart';
 import 'package:mascota/actividades.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Mascota extends StatelessWidget {
   const Mascota({super.key});
@@ -132,19 +134,26 @@ class Mascota extends StatelessWidget {
   Widget build(BuildContext context) {
     setInitialDate();
     guardarJson(actividadesJson);
+
     return Container(
-        color: Colors.indigo,
+        color: Color.fromARGB(255, 80, 131, 250),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.network(
                   'https://res.cloudinary.com/pepepots9414/image/upload/v1651287045/frappe-782544_ktsv6b.png'),
+              SizedBox(
+                height: 60,
+              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                      onPressed: () {}, child: const Text('Recompesas')),
+                      onPressed: () {},
+                      child: const Text('Recompesas'),
+                  ),
+                  
                   ElevatedButton(
                       onPressed: () async {
                         int dias = await calcularDias();
@@ -154,9 +163,17 @@ class Mascota extends StatelessWidget {
                               builder: (context) => Actividades(),
                             ));
                       },
-                      child: const Text('Actividades'))
+                      child: const Text('Actividades'),
+                  ),
                 ],
-              )
+              ),
+/*               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(watch.estado,
+                  style: TextStyle(color: Colors.white))
+                ],
+              ) */
             ],
           ),
         ));

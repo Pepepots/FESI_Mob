@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:mascota/DialogWidget.dart';
 import 'package:mascota/fondo.dart';
 
 class Relajacion extends StatefulWidget {
@@ -12,38 +15,42 @@ class Relajacion extends StatefulWidget {
 
 class _RelajacionState extends State<Relajacion> {
   AudioPlayer audioPlayer = AudioPlayer();
+  bool completado = false;
   String status = 'No iniciado';
   int _progress = 0;
   late int totalDurationInSeconds;
   //AudioCache x = AudioCache();
   //AudioPlayerState xc = AudioPlayerState()
-
   @override
   void initState() {
     super.initState();
     // status = '';
     totalDurationInSeconds = 0;
     audioPlayer.onPositionChanged.listen((duration) {
-      setState(() {
-        _progress = duration.inSeconds; // Actualiza el progreso
-        print(_progress);
-      });
+      if (mounted) { // Verificar si el widget está montado ya que tuve el error de llamar a setState después de que el widget ha sido eliminado del árbol de widgets.
+        setState(() {
+          _progress = duration.inSeconds; // Actualiza el progreso
+          print(_progress);
+        });
+      }
     });
     audioPlayer.onPlayerStateChanged.listen((state) {
-      setState(() {
+      if (mounted) { // Verificar si el widget está montado
         print(state);
-        if (state == PlayerState.playing) {
-          status = 'REPRODUCIENDO';
-        } else {
-          if (state == PlayerState.stopped) {
-            status = 'EN MODO PAUSA';
+        setState(() {
+          if (state == PlayerState.playing) {
+            status = 'REPRODUCIENDO';
+          } else if (state == PlayerState.stopped) {
+            status = 'DETENIDO';
+            completado = true;
           } else if (state == PlayerState.completed) {
             status = 'REPRODUCCIÓN COMPLETA';
           }
-        }
-      });
+        });
+      }
     });
   }
+
 
   @override
   void dispose() {
@@ -55,9 +62,7 @@ class _RelajacionState extends State<Relajacion> {
     await audioPlayer.play(AssetSource(path));
     int durationInSeconds = await getTotalDurationInSeconds(path);
     if (durationInSeconds > 0) {
-      setState(() {
-        totalDurationInSeconds = durationInSeconds;
-      });
+      totalDurationInSeconds = durationInSeconds;
     }
   }
 
@@ -76,12 +81,7 @@ class _RelajacionState extends State<Relajacion> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CupertinoColors.tertiarySystemBackground,
-        title: const Text('Relajacion', textAlign: TextAlign.center),
-        centerTitle: true,
-      ),
+    return completado ? const DialogWidget() : Scaffold(
       body: Stack(
         children: [
           const Fondo(), //FONDO DE PANTALLA
@@ -153,59 +153,26 @@ class _RelajacionState extends State<Relajacion> {
                         strokeWidth: 2.5, // Ancho de la barra
                       ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(
-                              width: 40,
-                            ),
-                            Text(
-                              'PROGRESO',
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            const SizedBox(
-                              width: 40,
-                            ),
-                            CircularProgressIndicator(
-                              value: status == 'REPRODUCIENDO'
-                                  ? _progress / totalDurationInSeconds
-                                  : 0,
-                              backgroundColor: Colors.white, // Color del fondo
-                              valueColor: const AlwaysStoppedAnimation<Color>(
-                                Colors.pinkAccent, // Color del progreso
-                              ),
-                              strokeWidth: 2.5, // Ancho de la barra
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            const SizedBox(
-                              width: 40,
-                            ),
-                            Text(
-                              'Estado: $status',
-                              style: const TextStyle(color: Colors.white),
-                            )
-                          ],
-                        )
-                      ],
-                    )
+                  ],
+                ),
+                const SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'ESTADO DE REPRODUCCIÓN',
+                      style: TextStyle(color: Colors.pink[50]),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      '$status',
+                      style: TextStyle(color: Colors.pink[50]),
+                    ),
                   ],
                 )
               ],
@@ -216,3 +183,5 @@ class _RelajacionState extends State<Relajacion> {
     );
   }
 }
+
+

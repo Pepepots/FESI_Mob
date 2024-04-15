@@ -116,10 +116,7 @@ class _MemoramaState extends State<Memorama> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Memorama'),
-      ),
-      backgroundColor: const Color.fromRGBO(32, 44, 86, 1),
+      backgroundColor: const Color.fromARGB(255, 80, 131, 250),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -134,7 +131,7 @@ class _MemoramaState extends State<Memorama> {
             ),
           ),
           const SizedBox(
-            height: 24.0,
+            height: 18.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -191,11 +188,11 @@ class _MemoramaState extends State<Memorama> {
                         height: 10.0,
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
-                          color: const Color.fromRGBO(172, 150, 90, 1),
+                          color: Color.fromARGB(255, 7, 71, 180),
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
                             image: AssetImage(_game.gameImg![index]),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain, 
                           ),
                         ),
                       ));
