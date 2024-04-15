@@ -37,7 +37,18 @@ class _MemoramaState extends State<Memorama> {
   }
 
   int inten = 0;
-  int _crossAxisCount = 2;
+  int _CrossAxisCount(int dia) {
+    if (dia <= 3) {
+      return 2;
+    } else if (dia <= 6) {
+      return 3;
+    } else if (dia <= 12) {
+      return 4;
+    } else {
+      return 5;
+    }
+  }
+
   bool memoramaCompleto = false;
 
   void completarMemorama() {
@@ -192,7 +203,7 @@ class _MemoramaState extends State<Memorama> {
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
                             image: AssetImage(_game.gameImg![index]),
-                            fit: BoxFit.contain, 
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ));
