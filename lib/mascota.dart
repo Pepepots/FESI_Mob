@@ -1,10 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:mascota/Providers/variableGlobal.dart';
 import 'package:mascota/actividades.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class Mascota extends StatelessWidget {
   const Mascota({super.key});
@@ -143,27 +140,26 @@ class Mascota extends StatelessWidget {
             children: [
               Image.network(
                   'https://res.cloudinary.com/pepepots9414/image/upload/v1651287045/frappe-782544_ktsv6b.png'),
-              SizedBox(
+              const SizedBox(
                 height: 60,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Recompesas'),
+                    onPressed: () {},
+                    child: const Text('Recompesas'),
                   ),
-                  
                   ElevatedButton(
-                      onPressed: () async {
-                        int dias = await calcularDias();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Actividades(),
-                            ));
-                      },
-                      child: const Text('Actividades'),
+                    onPressed: () async {
+                      // int dias = await calcularDias();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Actividades(),
+                          ));
+                    },
+                    child: const Text('Actividades'),
                   ),
                 ],
               ),
