@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mascota/actividades.dart';
 import 'package:mascota/utils/game_logic.dart';
+import 'main.dart';
 
 class Memorama extends StatefulWidget {
   const Memorama({Key? key}) : super(key: key);
@@ -10,9 +11,9 @@ class Memorama extends StatefulWidget {
 }
 
 class _MemoramaState extends State<Memorama> {
+  final int dias = 0;
   Game _game = Game(4);
   int inten = 0;
-  int punto = 0;
   int _crossAxisCount = 2;
   bool memoramaCompleto = false;
 
@@ -67,7 +68,7 @@ class _MemoramaState extends State<Memorama> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('Ni estaba tan dificil'),
+              title: const Text('Ni estaba tan dificil, inutil'),
               content: const SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
