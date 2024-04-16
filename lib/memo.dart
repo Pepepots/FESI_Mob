@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mascota/actividades.dart';
+import 'package:mascota/database.dart';
 import 'package:mascota/utils/game_logic.dart';
 import 'main.dart';
 
@@ -11,11 +12,26 @@ class Memorama extends StatefulWidget {
 }
 
 class _MemoramaState extends State<Memorama> {
-  final int dias = 0;
+  // final Database database = Database();
+  // final dia  = Database().calcularDias();
   Game _game = Game(4);
   int inten = 0;
   int _crossAxisCount = 2;
   bool memoramaCompleto = false;
+
+  void _numCards(int dias) {
+    if (dias <= 3) {
+      _updateSize(4, 2);
+    } else if (dias <= 6) {
+      _updateSize(6, 3);
+    } else if (dias <= 9) {
+      _updateSize(8, 4);
+    } else if (dias <= 12) {
+      _updateSize(16, 4);
+    } else {
+      _updateSize(20, 5);
+    }
+  }
 
   void _updateSize(int cards, int space) {
     setState(() {
@@ -26,34 +42,10 @@ class _MemoramaState extends State<Memorama> {
     });
   }
 
-  Widget board(String title, int cards, int space) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => _updateSize(cards, space),
-        child: Container(
-          margin: const EdgeInsets.all(26.0),
-          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 22.0),
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(6.0)),
-          child: Column(
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                    fontSize: 22.0, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 6.0,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   @override
   void initState() {
+    _numCards(4);
     super.initState();
     _game.initGame();
   }
@@ -111,16 +103,16 @@ class _MemoramaState extends State<Memorama> {
           const SizedBox(
             height: 18.0,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [board("2x2", 4, 2), board("3x2", 6, 3)],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [board("4x3", 12, 4), board("4x4", 16, 4)],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   children: [board("2x2", 4, 2), board("3x2", 6, 3)],
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   children: [board("4x3", 12, 4), board("4x4", 16, 4)],
+          // ),
           SizedBox(
             height: screenWidth,
             width: screenWidth,
