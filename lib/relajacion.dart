@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:mascota/DialogWidget.dart';
+import 'package:mascota/dialog_widget.dart';
 import 'package:mascota/fondo.dart';
 
 class Relajacion extends StatefulWidget {
