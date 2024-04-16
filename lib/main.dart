@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:mascota/mascota.dart';
 import 'database.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,20 +15,22 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Database database = Database();
-  var dias = 0;
+  int _dias = 0;
+
+  int get dias => _dias;
 
   @override
   void initState() {
     super.initState();
     database.setInitialDate();
     _calcularDias();
+    database.loadActivities();
   }
 
   void _calcularDias() async {
-    final int diasResult =
-        await database.calcularDias(); // Esperar el resultado
+    final int diasResult = await database.calcularDias();
     setState(() {
-      dias = diasResult; // Asignar el resultado a la variable 'dias'
+      _dias = diasResult;
     });
   }
 
