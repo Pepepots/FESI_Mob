@@ -1,29 +1,38 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mascota/mascota.dart';
+import 'database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  Future<void> setInitialDate() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey('fechaInicio')) {
-      prefs.setString('fechaInicio', DateTime.now().toIso8601String());
-    }
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final Database database = Database();
+  var dias = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    database.setInitialDate();
+    _calcularDias();
   }
 
-  Future<int> calcularDias() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey('fechaInicio')) {
-      DateTime fechaInicio = DateTime.parse(prefs.getString('fechaInicio')!);
-      DateTime fechaActual = DateTime.now();
-      return fechaActual.difference(fechaInicio).inDays;
-    }
-    return 0;
+  void _calcularDias() async {
+    final int diasResult =
+        await database.calcularDias(); // Esperar el resultado
+    setState(() {
+      dias = diasResult; // Asignar el resultado a la variable 'dias'
+    });
   }
 
   // This widget is the root of your application.

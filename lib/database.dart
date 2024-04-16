@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-class ActivityManager {
+class Database {
   int day = 0;
   Future<Map<String, dynamic>> loadActivities() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -41,13 +41,30 @@ class ActivityManager {
   }
 
   void markActivityAsComplete(int day, String activity) {
-    ActivityManager manager = ActivityManager();
+    Database manager = Database();
     manager.updateActivityStatus(day, activity, true);
   }
 
   void showActivitiesForDay(int day) async {
-    ActivityManager manager = ActivityManager();
+    Database manager = Database();
     Map<String, dynamic> activities = await manager.getActivitiesForDay(day);
     print("Actividades para el día $day: $activities");
+  }
+
+  Future<void> setInitialDate() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('fechaInicio')) {
+      prefs.setString('fechaInicio', DateTime.now().toIso8601String());
+    }
+  }
+
+  Future<int> calcularDias() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('fechaInicio')) {
+      DateTime fechaInicio = DateTime.parse(prefs.getString('fechaInicio')!);
+      DateTime fechaActual = DateTime.now();
+      return fechaActual.difference(fechaInicio).inDays;
+    }
+    return 0;
   }
 }

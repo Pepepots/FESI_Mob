@@ -20,7 +20,7 @@ class _MemoramaState extends State<Memorama> {
     setState(() {
       _game = Game(cards);
       _crossAxisCount = space;
-      memoramaCompleto = true;
+      memoramaCompleto = false;
       _game.initGame();
     });
   }

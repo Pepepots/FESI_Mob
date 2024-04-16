@@ -17,28 +17,16 @@ class Game {
     "assets/images/trapecio.png"
   ];
 
-  int dias;
+  int dias = 0;
   final List<String> cardList = [];
-  Set<String> usedCards = {};
+  Set<String> usedCards = Set();
   List<Map<int, String>> match = [];
-  int cartas = 4;
-  Game(this.dias) {
-    if (dias <= 3) {
-      cartas = 4;
-    } else if (dias > 3 && dias <= 6) {
-      cartas = 6;
-    } else if (dias > 6 && dias <= 9) {
-      cartas = 12;
-    } else if (dias > 9 && dias <= 12) {
-      cartas = 18;
-    } else if (dias > 12 && dias <= 15) {
-      cartas = 20;
-    }
-  }
+  int cardCount;
+  Game(this.cardCount);
 
   void initGame() {
-    Random random = Random();
-    while (cardList.length < cartas) {
+    Random random = new Random();
+    while (cardList.length < cardCount) {
       String randomCard = allCard[random.nextInt(allCard.length)];
       if (!usedCards.contains(randomCard)) {
         cardList.add(randomCard);
@@ -48,6 +36,6 @@ class Game {
     }
     cardList.shuffle();
 
-    gameImg = List.generate(cartas, (index) => hiddenCard);
+    gameImg = List.generate(cardCount, (index) => hiddenCard);
   }
 }
