@@ -54,11 +54,6 @@ class _Ejercicios2State extends State<Ejercicios2> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 80, 131, 250),
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text('Gimnasio de pesas', style: TextStyle(color: Colors.white),),
-      ),
       body: Center(
         child: Container(
           height: 640,

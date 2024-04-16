@@ -54,11 +54,6 @@ class _Ejercicios3State extends State<Ejercicios3> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 80, 131, 250),
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text('Caminar, correr o trotar', style: TextStyle(color: Colors.white),),
-      ),
       body: Center(
         child: Container(
           height: 640,
