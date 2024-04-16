@@ -16,6 +16,8 @@ class _RelajacionState extends State<Relajacion> {
   String status = 'No iniciado';
   int _progress = 0;
   late int totalDurationInSeconds;
+  late int progresoSetenta;
+  bool setentaCompletado = false;
   //AudioCache x = AudioCache();
   //AudioPlayerState xc = AudioPlayerState()
   @override
@@ -23,12 +25,18 @@ class _RelajacionState extends State<Relajacion> {
     super.initState();
     // status = '';
     totalDurationInSeconds = 0;
+    progresoSetenta = 37;
     audioPlayer.onPositionChanged.listen((duration) {
       if (mounted) {
         // Verificar si el widget está montado ya que tuve el error de llamar a setState después de que el widget ha sido eliminado del árbol de widgets.
         setState(() {
           _progress = duration.inSeconds; // Actualiza el progreso
           print(_progress);
+          if (_progress >= progresoSetenta){
+            setentaCompletado = true;
+            print('70: ' + setentaCompletado.toString());
+            completado = true;
+          }
         });
       }
     });
@@ -41,9 +49,9 @@ class _RelajacionState extends State<Relajacion> {
             status = 'REPRODUCIENDO';
           } else if (state == PlayerState.stopped) {
             status = 'DETENIDO';
-            completado = true;
           } else if (state == PlayerState.completed) {
             status = 'REPRODUCCIÓN COMPLETA';
+            completado = true;
           }
         });
       }
@@ -61,6 +69,10 @@ class _RelajacionState extends State<Relajacion> {
     int durationInSeconds = await getTotalDurationInSeconds(path);
     if (durationInSeconds > 0) {
       totalDurationInSeconds = durationInSeconds;
+      // Calcular el 70% del tiempo total de duración de la canción
+      print(totalDurationInSeconds);
+      progresoSetenta = (totalDurationInSeconds * 0.7).toInt();
+      print(progresoSetenta);
     }
   }
 

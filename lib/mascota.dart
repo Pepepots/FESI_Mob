@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mascota/actividades.dart';
+import 'package:mascota/recompensas.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Mascota extends StatelessWidget {
@@ -147,7 +148,9 @@ class Mascota extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const GridViewWidget() ));
+                    },
                     child: const Text('Recompesas'),
                   ),
                   ElevatedButton(
