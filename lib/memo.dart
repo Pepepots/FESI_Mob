@@ -14,6 +14,7 @@ class Memorama extends StatefulWidget {
 class _MemoramaState extends State<Memorama> {
   // final Database database = Database();
   // final dia  = Database().calcularDias();
+  int _dias = 5;
   Game _game = Game(4);
   int inten = 0;
   int _crossAxisCount = 2;
@@ -42,17 +43,25 @@ class _MemoramaState extends State<Memorama> {
     });
   }
 
+  Future<void> _obtenerDias() async {
+    int dias = await Database().calcularDias();
+    setState(() {
+      _dias = dias;
+    });
+  }
 
   @override
-  void initState() {
-    _numCards(4);
+  void initState(){
     super.initState();
+    _obtenerDias();
     _game.initGame();
   }
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    _numCards(_dias);
+
 
     if (memoramaCompleto) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
