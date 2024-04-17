@@ -62,7 +62,6 @@ class Database {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey('fechaInicio')) {
       DateTime fechaInicio = DateTime.parse(prefs.getString('fechaInicio')!);
-      print(fechaInicio);
       DateTime fechaActual = DateTime.now();
       return fechaActual.difference(fechaInicio).inDays;
     }
