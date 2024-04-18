@@ -139,8 +139,8 @@ class Mascota extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                  'https://res.cloudinary.com/pepepots9414/image/upload/v1651287045/frappe-782544_ktsv6b.png'),
+              Image.asset(
+                  './assets/images/puma.png'),
               const SizedBox(
                 height: 60,
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mascota/actividades.dart';
 import 'package:mascota/database.dart';
+import 'package:mascota/dialog_widget.dart';
 import 'package:mascota/utils/game_logic.dart';
 
 class Memorama extends StatefulWidget {
@@ -61,41 +62,9 @@ class _MemoramaState extends State<Memorama> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-
-    if (memoramaCompleto) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Ni estaba tan dificil, inutil'),
-              content: const SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Text('Vuelve mañana por mas'),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('Cerrar'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Actividades()));
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      });
-    }
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 80, 131, 250),
-      body: Column(
+      body: memoramaCompleto ? const DialogWidget() : Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
