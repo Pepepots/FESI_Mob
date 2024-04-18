@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mascota/dialog_widget.dart';
 
 class Ejercicios extends StatefulWidget {
   const Ejercicios({super.key});
@@ -40,6 +41,7 @@ class _EjerciciosState extends State<Ejercicios> {
   void _setValidarLista() {
     if ((_sentadilla && _abdominales && !_lagartijas) ||
         (_sentadilla && !_abdominales && _lagartijas) ||
+        (_sentadilla && _abdominales && _lagartijas) ||
         (!_sentadilla && _abdominales && _lagartijas)) {
       setState(() {
         _validarLista = true;
@@ -55,7 +57,7 @@ class _EjerciciosState extends State<Ejercicios> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: Center(
+      body: _validarLista ? const DialogWidget() : Center(
         child: Container(
           height: 640,
           width: 290,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mascota/actividades.dart';
 import 'package:mascota/database.dart';
 import 'package:mascota/utils/game_logic.dart';
-import 'main.dart';
 
 class Memorama extends StatefulWidget {
   const Memorama({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class Memorama extends StatefulWidget {
 class _MemoramaState extends State<Memorama> {
   // final Database database = Database();
   // final dia  = Database().calcularDias();
-  int _dias = 5;
+  int _dias = 0;
   Game _game = Game(4);
   int inten = 0;
   int _crossAxisCount = 2;
@@ -47,6 +46,7 @@ class _MemoramaState extends State<Memorama> {
     int dias = await Database().calcularDias();
     setState(() {
       _dias = dias;
+      _numCards(_dias);
     });
   }
 
@@ -60,7 +60,6 @@ class _MemoramaState extends State<Memorama> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    _numCards(_dias);
 
 
     if (memoramaCompleto) {
