@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mascota/dialog_widget.dart';
 
 class Ejercicios4 extends StatefulWidget {
   const Ejercicios4({super.key});
@@ -40,8 +39,7 @@ class _Ejercicios4State extends State<Ejercicios4> {
   void _setLista() {
     if ((_futbol && _taekwondo && !_atletismo) ||
         (_futbol && !_taekwondo && _atletismo) ||
-        (!_futbol && _taekwondo && _atletismo) ||
-        (_futbol && _taekwondo && _atletismo)) {
+        (!_futbol && _taekwondo && _atletismo)) {
       setState(() {
         _validarLista = true;
       });
@@ -56,11 +54,19 @@ class _Ejercicios4State extends State<Ejercicios4> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: _validarLista ? const DialogWidget() : Center(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 80, 131, 250),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
+          'Deporte',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: Center(
         child: Container(
           height: 640,
           width: 290,
-          color: Color.fromARGB(50, 80, 131, 253),
+          color: const Color.fromARGB(50, 80, 131, 253),
           child: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +74,7 @@ class _Ejercicios4State extends State<Ejercicios4> {
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: _futbol
-                        ? Color.fromARGB(60, 29, 106, 240)
+                        ? const Color.fromARGB(60, 29, 106, 240)
                         : Colors.transparent),
                 onPressed: _cambioColorfutbol,
                 child: const Text('Futbol'),
@@ -76,7 +82,7 @@ class _Ejercicios4State extends State<Ejercicios4> {
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: _taekwondo
-                        ? Color.fromARGB(60, 29, 106, 240)
+                        ? const Color.fromARGB(60, 29, 106, 240)
                         : Colors.transparent),
                 onPressed: _cambioColortaekwondo,
                 child: const Text('Taekwodo'),
@@ -84,7 +90,7 @@ class _Ejercicios4State extends State<Ejercicios4> {
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: _atletismo
-                        ? Color.fromARGB(60, 29, 106, 240)
+                        ? const Color.fromARGB(60, 29, 106, 240)
                         : Colors.transparent),
                 onPressed: _cambioColoratletismo,
                 child: const Text('Atletismo'),

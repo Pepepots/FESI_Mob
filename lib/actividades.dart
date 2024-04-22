@@ -10,7 +10,7 @@ class Actividades extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 80, 131, 250),
+      backgroundColor: const Color.fromARGB(255, 80, 131, 250),
       body: Padding(
         padding: const EdgeInsets.all(40.0), //Ajustar padding para el center XD
         child: Center(

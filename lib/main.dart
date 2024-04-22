@@ -3,7 +3,7 @@ import 'package:mascota/mascota.dart';
 import 'database.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -30,8 +30,8 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Mascota',
         theme: ThemeData(
-          colorScheme:
-              ColorScheme.fromSeed(seedColor: Color.fromARGB(6, 4, 81, 248)),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(6, 4, 81, 248)),
           useMaterial3: true,
         ),
         home: const Mascota());

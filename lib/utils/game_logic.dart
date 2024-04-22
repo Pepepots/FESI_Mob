@@ -19,13 +19,13 @@ class Game {
 
   int dias = 0;
   final List<String> cardList = [];
-  Set<String> usedCards = Set();
+  Set<String> usedCards = {};
   List<Map<int, String>> match = [];
   int cardCount;
   Game(this.cardCount);
 
   void initGame() {
-    Random random = new Random();
+    Random random = Random();
     while (cardList.length < cardCount) {
       String randomCard = allCard[random.nextInt(allCard.length)];
       if (!usedCards.contains(randomCard)) {

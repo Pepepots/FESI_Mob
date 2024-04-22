@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mascota/dialog_widget.dart';
 
 class Ejercicios3 extends StatefulWidget {
   const Ejercicios3({super.key});
@@ -40,8 +39,7 @@ class _Ejercicios3State extends State<Ejercicios3> {
   void _setLista() {
     if ((_caminata30 && _trotar15 && !_correr10) ||
         (_caminata30 && !_trotar15 && _correr10) ||
-        (!_caminata30 && _trotar15 && _correr10) ||
-        (_caminata30 && _trotar15 && _correr10)) {
+        (!_caminata30 && _trotar15 && _correr10)) {
       setState(() {
         _validarLista = true;
       });
@@ -56,11 +54,19 @@ class _Ejercicios3State extends State<Ejercicios3> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: _validarLista ? const DialogWidget() : Center(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 80, 131, 250),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
+          'Caminar, correr o trotar',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: Center(
         child: Container(
           height: 640,
           width: 290,
-          color: Color.fromARGB(50, 80, 131, 253),
+          color: const Color.fromARGB(50, 80, 131, 253),
           child: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +74,7 @@ class _Ejercicios3State extends State<Ejercicios3> {
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: _caminata30
-                        ? Color.fromARGB(60, 29, 106, 240)
+                        ? const Color.fromARGB(60, 29, 106, 240)
                         : Colors.transparent),
                 onPressed: _cambioColorcaminata30,
                 child: const Text('Caminata de 30 min'),
@@ -76,7 +82,7 @@ class _Ejercicios3State extends State<Ejercicios3> {
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: _trotar15
-                        ? Color.fromARGB(60, 29, 106, 240)
+                        ? const Color.fromARGB(60, 29, 106, 240)
                         : Colors.transparent),
                 onPressed: _cambioColortrotar15,
                 child: const Text('Trotar durante 15 min'),
@@ -84,7 +90,7 @@ class _Ejercicios3State extends State<Ejercicios3> {
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: _correr10
-                        ? Color.fromARGB(60, 29, 106, 240)
+                        ? const Color.fromARGB(60, 29, 106, 240)
                         : Colors.transparent),
                 onPressed: _cambioColorcorrer10,
                 child: const Text('Correr durante 10 minutos'),

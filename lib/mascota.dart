@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mascota/actividades.dart';
-import 'package:mascota/recompensas.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Mascota extends StatelessWidget {
@@ -134,13 +133,13 @@ class Mascota extends StatelessWidget {
     guardarJson(actividadesJson);
 
     return Container(
-        color: Color.fromARGB(255, 80, 131, 250),
+        color: const Color.fromARGB(255, 80, 131, 250),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                  './assets/images/puma.png'),
+              Image.network(
+                  'https://res.cloudinary.com/pepepots9414/image/upload/v1651287045/frappe-782544_ktsv6b.png'),
               const SizedBox(
                 height: 60,
               ),
@@ -148,9 +147,7 @@ class Mascota extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const GridViewWidget() ));
-                    },
+                    onPressed: () {},
                     child: const Text('Recompesas'),
                   ),
                   ElevatedButton(

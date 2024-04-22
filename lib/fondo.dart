@@ -17,7 +17,7 @@ class _FondoState extends State<Fondo> with SingleTickerProviderStateMixin {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 10),
+      duration: const Duration(seconds: 10),
     )..repeat(reverse: true);
     _colorAnimation = _controller.drive(ColorTween(
       begin: Colors.blue,

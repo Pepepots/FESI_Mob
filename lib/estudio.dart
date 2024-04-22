@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mascota/dialog_widget.dart';
 
 class Estudio extends StatefulWidget {
   const Estudio({Key? key}) : super(key: key);
@@ -24,7 +23,7 @@ class _EstudioState extends State<Estudio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 80, 131, 250),
+      backgroundColor: const Color.fromARGB(255, 80, 131, 250),
       body: _questionIndex < _questions.length
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -59,8 +58,18 @@ class _EstudioState extends State<Estudio> {
               ],
             )
           : _answers.where((answer) => answer).length >= 4
-              ? const DialogWidget()
-              : const DialogWidget()
+              ? const Center(
+                  child: Text(
+                    'Felicidades, completaste el primer día!',
+                    style: TextStyle(fontSize: 24, color: Colors.white),
+                  ),
+                )
+              : const Center(
+                  child: Text(
+                    'Buen intento, sigue intentando!',
+                    style: TextStyle(fontSize: 24, color: Colors.white),
+                  ),
+                ),
     );
   }
 }

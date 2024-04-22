@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mascota/dialog_widget.dart';
 
 class Ejercicios2 extends StatefulWidget {
   const Ejercicios2({super.key});
@@ -40,8 +39,7 @@ class _Ejercicios2State extends State<Ejercicios2> {
   void _setLista() {
     if ((_pressBanca && _maquinaRemo && !_sentadillaSmith) ||
         (_pressBanca && !_maquinaRemo && _sentadillaSmith) ||
-        (!_pressBanca && _maquinaRemo && _sentadillaSmith) ||
-        (_pressBanca && _maquinaRemo && _sentadillaSmith)) {
+        (!_pressBanca && _maquinaRemo && _sentadillaSmith)) {
       setState(() {
         _validarLista = true;
       });
@@ -56,7 +54,15 @@ class _Ejercicios2State extends State<Ejercicios2> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: _validarLista ? const DialogWidget() : Center(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 80, 131, 250),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
+          'Gimnasio de pesas',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: Center(
         child: Container(
           height: 640,
           width: 290,
@@ -68,7 +74,7 @@ class _Ejercicios2State extends State<Ejercicios2> {
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: _pressBanca
-                        ? Color.fromARGB(60, 29, 106, 240)
+                        ? const Color.fromARGB(60, 29, 106, 240)
                         : Colors.transparent),
                 onPressed: _cambioColorpressBanca,
                 child: const Text('Press Banca'),
@@ -76,7 +82,7 @@ class _Ejercicios2State extends State<Ejercicios2> {
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: _maquinaRemo
-                        ? Color.fromARGB(60, 29, 106, 240)
+                        ? const Color.fromARGB(60, 29, 106, 240)
                         : Colors.transparent),
                 onPressed: _cambioColormaquinaRemo,
                 child: const Text('Maquina de Remo'),
@@ -84,7 +90,7 @@ class _Ejercicios2State extends State<Ejercicios2> {
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: _sentadillaSmith
-                        ? Color.fromARGB(60, 29, 106, 240)
+                        ? const Color.fromARGB(60, 29, 106, 240)
                         : Colors.transparent),
                 onPressed: _cambioColorsentadillaSmith,
                 child: const Text('Sentadilla en maquina Smith'),
