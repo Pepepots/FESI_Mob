@@ -15,23 +15,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Database database = Database();
-  int _dias = 0;
-
-  int get dias => _dias;
 
   @override
   void initState() {
     super.initState();
     database.setInitialDate();
-    _calcularDias();
     database.loadActivities();
-  }
-
-  void _calcularDias() async {
-    final int diasResult = await database.calcularDias();
-    setState(() {
-      _dias = diasResult;
-    });
   }
 
   // This widget is the root of your application.

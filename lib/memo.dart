@@ -1,21 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:mascota/actividades.dart';
 import 'package:mascota/utils/game_logic.dart';
-import 'main.dart';
+import 'database.dart';
 
 class Memorama extends StatefulWidget {
-  const Memorama({Key? key}) : super(key: key);
+  Memorama({Key? key}) : super(key: key);
+  final Database database = Database();
 
   @override
   State<Memorama> createState() => _MemoramaState();
 }
 
 class _MemoramaState extends State<Memorama> {
-  final int dias = 0;
+  final Database database = Database();
+  late final int dias;
   Game _game = Game(4);
   int inten = 0;
-  int _crossAxisCount = 2;
+  late int _crossAxisCount;
   bool memoramaCompleto = false;
+
+  @override
+  void initState() {
+    super.initState();
+    database.setInitialDate();
+    _inicializarDias();
+  }
+
+  void _inicializarDias() async {
+    dias = await database.calcularDias();
+    setState(() {
+      if (dias <= 3) {
+        _updateSize(4, 2);
+      } else if (dias <= 6) {
+        _updateSize(6, 3);
+      } else if (dias <= 9) {
+        _updateSize(8, 4);
+      } else if (dias <= 12) {
+        _updateSize(16, 4);
+      } else {
+        _updateSize(20, 5);
+      }
+      _game.initGame();
+    });
+  }
 
   void _updateSize(int cards, int space) {
     setState(() {
@@ -50,12 +77,6 @@ class _MemoramaState extends State<Memorama> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _game.initGame();
   }
 
   @override
@@ -111,6 +132,7 @@ class _MemoramaState extends State<Memorama> {
           const SizedBox(
             height: 18.0,
           ),
+          /*
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -120,7 +142,7 @@ class _MemoramaState extends State<Memorama> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [board("4x3", 12, 4), board("4x4", 16, 4)],
-          ),
+          ),*/
           SizedBox(
             height: screenWidth,
             width: screenWidth,
@@ -140,8 +162,10 @@ class _MemoramaState extends State<Memorama> {
                           _game.match.add({index: _game.cardList[index]});
                         });
                         if (_game.match.length == 2) {
-                          if (_game.match[0].values.first ==
-                              _game.match[1].values.first) {
+                          if (_game.match[0].keys.first !=
+                                  _game.match[1].keys.first &&
+                              _game.match[0].values.first ==
+                                  _game.match[1].values.first) {
                             _game.match.clear();
                             if (_game.gameImg!
                                 .every((img) => img != _game.hiddenCard)) {

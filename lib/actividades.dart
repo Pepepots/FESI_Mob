@@ -22,20 +22,24 @@ class Actividades extends StatelessWidget {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Ejercicio()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Ejercicio()));
                   },
                   child: const Text('Ejercicio')),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Estudio()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Estudio()));
                   },
                   child: const Text('Estudio')),
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Memorama()));
+                        MaterialPageRoute(builder: (context) => Memorama()));
                   },
                   child: const Text('Memorama')),
               ElevatedButton(
